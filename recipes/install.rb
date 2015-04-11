@@ -58,3 +58,4 @@ when "ubuntu"
   end
 end
 
+include_recipe "ntp"

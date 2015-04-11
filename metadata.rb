@@ -18,6 +18,7 @@ supports 'suse', ">= 11.0"
 supports 'ubuntu', ">= 12.0"
 depends 'apt'
 depends 'kagent'
+depends 'ntp'
 
 attribute "ambari/admin_password",
 :display_name => "Ambari server admin password (username: admin)",

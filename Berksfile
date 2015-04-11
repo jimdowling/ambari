@@ -4,3 +4,4 @@ metadata
 
 cookbook 'kagent', github: 'karamelchef/kagent-chef', branch: "master"
 cookbook 'apt'
+cookbook 'ntp'
