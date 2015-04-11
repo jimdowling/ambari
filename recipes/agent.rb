@@ -20,9 +20,13 @@
 #include_recipe "ambari::setup_package_manager"
 libpath = File.expand_path '../../../kagent/libraries', __FILE__
 require File.join(libpath, 'inifile')
+require 'resolv'
 
 server_ip = private_recipe_ip("ambari","server")
-node.default['ambari']['server']['fdqn']= server_ip
+node.default['ambari']['server_fdqn']= server_ip
+
+server_fqdn = Resolv::IPv4.getname(server_ip).to_s
+
 
 %w'ambari-agent'.each do | pack |
   package pack do
@@ -48,11 +52,8 @@ execute "alternatives configured confdir" do
   command "update-alternatives --install /etc/ambari-agent/conf ambari-agent-conf /etc/ambari-agent/conf.chef 90"
 end
 
-if Chef::Config[:solo]
-  Chef::Log.warn("This recipe uses search. Chef Solo does not support search.")
-else
-  ambari_server_fqdn = node['ambari']['server_fqdn'] || search('node', 'run_list:recipe\[ambari\:\:server\] AND chef_environment:'+node.chef_environment).first['fqdn']
-end
+#ambari_server_fqdn = node['ambari']['server_fqdn'] 
+
 
 template "/etc/ambari-agent/conf/ambari-agent.ini" do
   source "ambari-agent.ini.erb"
@@ -60,7 +61,7 @@ template "/etc/ambari-agent/conf/ambari-agent.ini" do
   user "root"
   group "root"
   variables({
-    ambari_server_fqdn: ambari_server_fqdn
+    ambari_server_fqdn: server_ip
   })
 end
 
