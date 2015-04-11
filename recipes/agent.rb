@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-include_recipe "ambari::setup_package_manager"
+#include_recipe "ambari::setup_package_manager"
 
 %w'ambari-agent'.each do | pack |
   package pack do

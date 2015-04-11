@@ -1,0 +1,10 @@
+dependencies: 
+  - recipe: ambari::install
+  - recipe: ambari::server
+    local:
+      - ambari::install
+  - recipe: ambari::agent
+    local:
+      - ambari::install
+    global:  
+      - ambari::server
