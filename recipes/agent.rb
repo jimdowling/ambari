@@ -18,6 +18,8 @@
 #
 
 #include_recipe "ambari::setup_package_manager"
+libpath = File.expand_path '../../../kagent/libraries', __FILE__
+require File.join(libpath, 'inifile')
 
 server_ip = private_recipe_ip("ambari","server")
 node.default['ambari']['server']['fdqn']= server_ip
