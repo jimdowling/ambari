@@ -1,7 +1,6 @@
 name             'ambari'
 maintainer       'JULIEN PELLET'
 maintainer_email 'chef@julienpellet.com'
-additional_author 'Jim Dowling'
 license          'Apache 2.0'
 description      'Installs/Configures ambari'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
@@ -20,7 +19,7 @@ supports 'ubuntu', ">= 12.0"
 depends 'apt'
 
 
-attribute "ambari/admin_password"
+attribute "ambari/admin_password",
 :display_name => "Ambari server admin password (username: admin)",
 :type => 'string',
 :default => "admin"
