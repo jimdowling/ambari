@@ -20,12 +20,12 @@
 #include_recipe "ambari::setup_package_manager"
 libpath = File.expand_path '../../../kagent/libraries', __FILE__
 require File.join(libpath, 'inifile')
-require 'resolv'
+#require 'resolv'
 
 server_ip = private_recipe_ip("ambari","server")
 node.default['ambari']['server_fdqn']= server_ip
 
-server_fqdn = Resolv::IPv4.getname(server_ip).to_s
+#server_fqdn = Resolv::IPv4.getname(server_ip).to_s
 
 
 %w'ambari-agent'.each do | pack |
@@ -51,9 +51,6 @@ end
 execute "alternatives configured confdir" do
   command "update-alternatives --install /etc/ambari-agent/conf ambari-agent-conf /etc/ambari-agent/conf.chef 90"
 end
-
-#ambari_server_fqdn = node['ambari']['server_fqdn'] 
-
 
 template "/etc/ambari-agent/conf/ambari-agent.ini" do
   source "ambari-agent.ini.erb"
