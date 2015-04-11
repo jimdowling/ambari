@@ -12,3 +12,14 @@ supports 'scientific', ">= 5.0"
 supports 'suse', ">= 11.0"
 supports 'ubuntu', ">= 12.0"
 depends 'apt'
+
+recipe   "ambari::server", "Installs an Ambari Server"
+recipe   "ambari::agent", "Installs an Ambari agent"
+recipe   "ambari::blueprints", "Installs an Ambari blueprint"
+
+
+attribute "ambari/admin_password"
+:display_name => "Ambari server admin password (username: admin)",
+:type => 'string',
+:default => "admin"
+
