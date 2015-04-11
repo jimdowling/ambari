@@ -19,6 +19,9 @@
 
 #include_recipe "ambari::setup_package_manager"
 
+server_ip = private_recipe_ip("ambari","server")
+node.default['ambari']['server']['fdqn']= server_ip
+
 %w'ambari-agent'.each do | pack |
   package pack do
     action :install

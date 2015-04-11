@@ -20,6 +20,7 @@ suites:
   - name: default
     run_list:
       - recipe[kagent::install]
+      - recipe[ambari::install]
       - recipe[ambari::server]
       - recipe[ambari::agent]
 
